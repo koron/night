@@ -6,7 +6,7 @@ var Head = require('./lib/head_filter');
 var Tail = require('./lib/tail_filter');
 
 var s = fs.createReadStream('test.txt', { bufferSize: 1 });
-var reader = new Tail(new Reader(s));
+var reader = new Head(new Reader(s), { limits: 5});
 
 var count = 0;
 reader.on('line', function(line) {
