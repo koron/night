@@ -7,13 +7,13 @@ var Tail = require('./lib/tail_filter');
 var Grep =require('./lib/grep_filter');
 
 var s = fs.createReadStream('test.txt', { bufferSize: 1 });
-var reader = new Grep(new Reader(s), /vim/);
+var reader = new Head(new Grep(new Reader(s), /Vim/));
 
 var count = 0;
 reader.on('line', function(line) {
-    console.log('line: ' + line);
-    ++count;
+  console.log('line: ' + line);
+  ++count;
 });
 reader.on('end', function() {
-    console.log('count: ' + count);
+  console.log('count: ' + count);
 });
