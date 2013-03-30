@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var http = require('http');
+var util = require('util');
 
 var Options = require('./lib/options.js');
 var Reader = require('./lib/stream_line_reader.js');
@@ -39,7 +40,7 @@ function handleNightRequst(request, response)
     if (stats.isFile()) {
       var source = getNightSource(path, getNightFilters(request.url));
       response.writeHead(200, {
-	'Content-Type': 'application/octet'
+	'Content-Type': 'text/plain'
       });
       transferFile(source, response, function() {
 	response.end();
@@ -65,7 +66,8 @@ function getNightSource(path, filters)
   var src = new Reader(fs.createReadStream(path));
   for (var i = 0, len = filters.length; i < len; ++i) {
     var filter = filters[i];
-    src = new filter(src);
+    var newsrc = filter(src);
+    src = newsrc;
   }
   return src;
 }
@@ -80,8 +82,49 @@ function transferFile(src, dest, callback) {
   }
 }
 
+var filterTable = {
+  'grep': Grep,
+  'head': Head,
+  'tail': Tail,
+}
+
 function getNightFilters(url)
 {
-  // TODO: implment me.
-  return [];
+  var filters = [];
+  var parts = getQueryString(url).split('&');
+  for (var i = 0, len = parts.length; i < len; ++i) {
+    var subparts = parts[i].split('=', 2);
+    var name = subparts[0];
+    var options = subparts.length >= 2 ? parseOptions(subparts[1]) : null;
+    if (name in filterTable) {
+      filters.push(filterFactory(filterTable[name], options));
+    } else {
+      // TODO: error.
+    }
+  }
+  return filters;
+}
+
+function filterFactory(ctor, options)
+{
+  return function(src) {
+    return new ctor(src, options);
+  }
+}
+
+function getQueryString(url)
+{
+  var index = url.indexOf('?');
+  return index >= 0 ? url.substring(index + 1) : ''
+}
+
+function parseOptions(str)
+{
+  var options = {};
+  var parts = str.split(',');
+  for (var i = 0, len = parts.length; i < len; ++i) {
+    var subparts = parts[i].split(':', 2);
+    options[subparts[0]] = subparts[1];
+  }
+  return options;
 }
