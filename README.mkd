@@ -1,0 +1,91 @@
+# Night - file filter (grep, head & tail) - server.
+
+## USAGE
+
+Start **night** on a server.
+
+    $ node night.js
+
+Then access by HTTP from client.
+
+    $ curl http://127.0.0.1:8080/night/var/log/messages?tail
+
+You will get last 10 lines of /var/log/messages on a server.
+
+## URL
+
+### General
+
+    http://{host}:8080/night{/path/to/file}[?{filters}]
+
+`filters` is optional.
+
+Where `{filters}` is:
+
+    {filter}[&{filter}...]
+
+Where `{filter}` is:
+
+    {filter_name}[={options}]
+
+Where `{options}` is:
+
+    {option_name}:{value}[,{option_name}:{value}...]
+
+See other section for detail of each filters.
+
+Example: get last 50 lines except empty lines.
+
+    http://127.0.0.1:8080/night/var/log/messages?grep=re:^$,match:false&tail=limit:50
+
+## Filters
+
+Currenly support these filters:
+
+* Grep filter
+* Head filter
+* Tail filter
+
+### Grep filter
+
+Output lines which matches against regular expression.
+
+`grep` command equivalent.
+
+* filter\_name: `grep`
+* options
+  * `re` - regular expression used for match.
+  * `match` - output when match or not match.  default is true.
+
+### Head filter
+
+Output the first N lines.
+
+`head` command equivalent.
+
+* filter\_name: `head`
+* options
+  * `start` - start line number for output.  begging 0.  default is 0.
+  * `limit` - line number for output.  defualt is 10.
+
+### Tail filter
+
+Output the last N lines.
+
+`tail` command equivalent.
+
+* filter\_name: `tail`
+* options
+  * `limit` - line number for output.  defualt is 10.
+
+## TODO
+
+* (簡単な)認証を付ける
+* アクセスできるファイルに制限をかける
+* domainを使ってエラー耐性を高める
+* daemonの作法に従う
+* cluster化
+* packageとしての体裁を整える
+* Implement new filters.
+* Implement UI pages.
+* このリストをを英語化する ;)
