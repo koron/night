@@ -3,16 +3,16 @@
 var fs = require('fs');
 var Reader = require('./lib/stream_line_reader');
 var Head = require('./lib/head_filter');
+var Tail = require('./lib/tail_filter');
 
 var s = fs.createReadStream('test.txt', { bufferSize: 1 });
-var reader = new Reader(s);
-var head = new Head(reader);
+var reader = new Tail(new Reader(s));
 
 var count = 0;
-head.on('line', function(line) {
+reader.on('line', function(line) {
     console.log('line: ' + line);
     ++count;
 });
-head.on('end', function() {
+reader.on('end', function() {
     console.log('count: ' + count);
 });
