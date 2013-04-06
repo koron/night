@@ -12,13 +12,11 @@ Then access by HTTP from client.
 
 You will get last 10 lines of /var/log/messages on a server.
 
-## URL
+### URL for File
 
-### File
+Access URL for file content is formed by the format:
 
-To obtain file content.
-
-    http://{host}:8080/files{/path/to/file}[?{filters}]
+    http://{host}:8080/night{/path/to/file}[?{filters}]
 
 `filters` is optional.
 
@@ -40,9 +38,9 @@ Example: get last 50 lines except empty lines.
 
     http://127.0.0.1:8080/files/var/log/messages?grep=re:^$;match:false&tail=limit:50
 
-### Directory.
+### URL for Directory.
 
-To obtain entry list in the directory.
+Access URL for directory content (entry list) is formed by the format:
 
     http://{host}:8080/files{/path/to/dir}[?{filters}]
 
@@ -61,7 +59,7 @@ Example: get name and size entries in /var/log.
 
     http://127.0.0.1:8080/files/var/log?cut=list:1,3
 
-## Filters
+### Filters
 
 Currenly support these filters:
 
@@ -70,7 +68,7 @@ Currenly support these filters:
 * Tail filter
 * Cut filters
 
-### Grep filter
+#### Grep filter
 
 Output lines which matches against regular expression.
 
@@ -81,7 +79,7 @@ Output lines which matches against regular expression.
   * `re` - regular expression used for match.
   * `match` - output when match or not match.  default is true.
 
-### Head filter
+#### Head filter
 
 Output the first N lines.
 
@@ -92,7 +90,7 @@ Output the first N lines.
   * `start` - start line number for output.  begging 0.  default is 0.
   * `limit` - line number for output.  defualt is 10.
 
-### Tail filter
+#### Tail filter
 
 Output the last N lines.
 
@@ -102,7 +100,7 @@ Output the last N lines.
 * options
   * `limit` - line number for output.  defualt is 10.
 
-### Cut filter
+#### Cut filter
 
 Output selected fields of lines.
 
@@ -117,6 +115,19 @@ Output selected fields of lines.
     * `N-` - from N'th field, to end of line.
     * `N-` - from first, to N'th field.
 
+## Example
+
+### Detect I/O error from /var/log/messages
+
+    $ curl http://127.0.0.1:8080/night/var/log/messages?grep=re:I%27O
+
+### Check whether a program "WATCHDOG" was executed by cron or not.
+
+    $ curl http://127.0.0.1:8080/night/var/log/cron?grep=re:WATCHDOG
+
+### Found errors of HTTP access, limited recent 100 records.
+
+    $ curl http://127.0.0.1:8080/night/var/log/nginx/access.log?grep=re:200,match:false&tail=limit:100
 
 ## TODO
 
