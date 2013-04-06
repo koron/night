@@ -6,6 +6,7 @@ var util = require('util');
 
 var Options = require('./lib/options.js');
 var Reader = require('./lib/stream_line_reader.js');
+var DirectoryReader = require('./lib/directory_reader.js');
 var Head = require('./lib/head_filter.js');
 var Tail = require('./lib/tail_filter.js');
 var Grep = require('./lib/grep_filter.js');
@@ -39,11 +40,19 @@ function handleNightRequst(request, response)
       return;
     }
     if (stats.isFile()) {
-      var source = getNightSource(path, getNightFilters(request.url));
+      var source = getFileSource(path, getNightFilters(request.url));
       response.writeHead(200, {
 	'Content-Type': 'text/plain'
       });
-      transferFile(source, response, function() {
+      transferAllLines(source, response, function() {
+	response.end();
+      });
+    } else if (stats.isDirectory()) {
+      var source = getDirectorySource(path, getNightFilters(request.url));
+      response.writeHead(200, {
+	'Content-Type': 'text/plain'
+      });
+      transferAllLines(source, response, function() {
 	response.end();
       });
     } else {
@@ -62,9 +71,9 @@ function getNightPath(url)
   return path;
 }
 
-function getNightSource(path, filters)
+function applyFilters(source, filters)
 {
-  var src = new Reader(fs.createReadStream(path));
+  var src = source;
   for (var i = 0, len = filters.length; i < len; ++i) {
     var filter = filters[i];
     var newsrc = filter(src);
@@ -73,7 +82,20 @@ function getNightSource(path, filters)
   return src;
 }
 
-function transferFile(src, dest, callback) {
+function getFileSource(path, filters)
+{
+  var src = new Reader(fs.createReadStream(path));
+  return applyFilters(src, filters);
+}
+
+function getDirectorySource(path, filters)
+{
+  var src = new DirectoryReader(path);
+  // TODO:
+  return applyFilters(src, filters);
+}
+
+function transferAllLines(src, dest, callback) {
   src.on('line', function(line) {
     dest.write(line);
     dest.write('\n');
