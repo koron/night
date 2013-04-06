@@ -13,7 +13,7 @@ var Cut = require('./lib/cut_filter.js');
 
 var options = new Options({
   port: 8080,
-  prefix: '/night'
+  prefix: '/files'
 });
 
 var server = http.createServer(handleRequest);

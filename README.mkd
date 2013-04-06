@@ -8,7 +8,7 @@ Start **night** on a server.
 
 Then access by HTTP from client.
 
-    $ curl http://127.0.0.1:8080/night/var/log/messages?tail
+    $ curl http://127.0.0.1:8080/files/var/log/messages?tail
 
 You will get last 10 lines of /var/log/messages on a server.
 
@@ -36,7 +36,7 @@ See other section for detail of each filters.
 
 Example: get last 50 lines except empty lines.
 
-    http://127.0.0.1:8080/night/var/log/messages?grep=re:^$;match:false&tail=limit:50
+    http://127.0.0.1:8080/files/var/log/messages?grep=re:^$;match:false&tail=limit:50
 
 ## Filters
 
