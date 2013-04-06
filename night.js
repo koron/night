@@ -9,6 +9,7 @@ var Reader = require('./lib/stream_line_reader.js');
 var Head = require('./lib/head_filter.js');
 var Tail = require('./lib/tail_filter.js');
 var Grep = require('./lib/grep_filter.js');
+var Cut = require('./lib/cut_filter.js');
 
 var options = new Options({
   port: 8080,
@@ -83,6 +84,7 @@ function transferFile(src, dest, callback) {
 }
 
 var filterTable = {
+  'cut': Cut,
   'grep': Grep,
   'head': Head,
   'tail': Tail,
@@ -121,7 +123,7 @@ function getQueryString(url)
 function parseOptions(str)
 {
   var options = {};
-  var parts = str.split(',');
+  var parts = str.split(';');
   for (var i = 0, len = parts.length; i < len; ++i) {
     var subparts = parts[i].split(':', 2);
     options[subparts[0]] = subparts[1];
