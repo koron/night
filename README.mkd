@@ -8,7 +8,7 @@ Start **night** on a server.
 
 Then access by HTTP from client.
 
-    $ curl http://127.0.0.1:8080/files/var/log/messages?tail
+    $ curl http://127.0.0.1:9280/files/var/log/messages?tail
 
 You will get last 10 lines of /var/log/messages on a server.
 
@@ -16,7 +16,7 @@ You will get last 10 lines of /var/log/messages on a server.
 
 Access URL for file content is formed by the format:
 
-    http://{host}:8080/night{/path/to/file}[?{filters}]
+    http://{host}:9280/night{/path/to/file}[?{filters}]
 
 `filters` is optional.
 
@@ -36,13 +36,13 @@ See other section for detail of each filters.
 
 Example: get last 50 lines except empty lines.
 
-    http://127.0.0.1:8080/files/var/log/messages?grep=re:^$;match:false&tail=limit:50
+    http://127.0.0.1:9280/files/var/log/messages?grep=re:^$;match:false&tail=limit:50
 
 ### URL for Directory.
 
 Access URL for directory content (entry list) is formed by the format:
 
-    http://{host}:8080/files{/path/to/dir}[?{filters}]
+    http://{host}:9280/files{/path/to/dir}[?{filters}]
 
 You will get lines in this format:
 
@@ -57,7 +57,7 @@ Where `\t` is TAB character, so you can choose by cut filter easily.
 
 Example: get name and size entries in /var/log.
 
-    http://127.0.0.1:8080/files/var/log?cut=list:1,3
+    http://127.0.0.1:9280/files/var/log?cut=list:1,3
 
 ### Filters
 
@@ -119,15 +119,15 @@ Output selected fields of lines.
 
 ### Detect I/O error from /var/log/messages
 
-    $ curl http://127.0.0.1:8080/night/var/log/messages?grep=re:I%27O
+    $ curl http://127.0.0.1:9280/night/var/log/messages?grep=re:I%27O
 
 ### Check whether a program "WATCHDOG" was executed by cron or not.
 
-    $ curl http://127.0.0.1:8080/night/var/log/cron?grep=re:WATCHDOG
+    $ curl http://127.0.0.1:9280/night/var/log/cron?grep=re:WATCHDOG
 
 ### Found errors of HTTP access, limited recent 100 records.
 
-    $ curl http://127.0.0.1:8080/night/var/log/nginx/access.log?grep=re:200,match:false&tail=limit:100
+    $ curl http://127.0.0.1:9280/night/var/log/nginx/access.log?grep=re:200,match:false&tail=limit:100
 
 ## TODO
 
