@@ -113,7 +113,8 @@ Currenly support these filters:
 * Grep filter
 * Head filter
 * Tail filter
-* Cut filters
+* Cut filter
+* Refresh (pseudo) filter
 
 #### Grep filter
 
@@ -162,6 +163,16 @@ Output selected fields of lines.
     * `N-` - from N'th field, to end of line.
     * `N-` - from first, to N'th field.
 
+#### Refresh (pseudo) filter
+
+Add "Refresh" header with specified time (sec).
+
+* filter\_name: `refresh`
+* options: interval seconds to refresh.  0 for disable.
+
+Example: Open below URL using WEB browser, it refresh in each 5 seconds automatically.
+
+    http://127.0.0.1:9280/files/var/log/messages?tail&refresh=5
 
 ## Example
 
