@@ -1,0 +1,23 @@
+{
+  "name": "night",
+  "version": "0.1.0",
+  "description": "File server with filters.",
+  "main": "./lib/night_server.js",
+  "dependencies": {
+    "node-getopt": "~0.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/koron/night.git"
+  },
+  "author": "MURAOKA Taro <koron.kaoriya@gmail.com>",
+  "license": "BSD",
+  "readmeFilename": "README.mkd",
+  "bin": {
+    "night": "./bin/night"
+  }
+}
