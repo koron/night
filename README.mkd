@@ -29,7 +29,7 @@ You will get last 10 lines of /var/log/messages on a server.
 Where OPTIONS are:
 
 * `-c {FILE}` or `--config=FILE` - server configuration file.
-* `-v` or `--verbose` - verbose message.
+* `-v` or `--verbose` - verbose message (not implemented yet).
 * `-h` or `--help` - show help message
 
 
