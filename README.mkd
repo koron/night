@@ -19,8 +19,11 @@ Then access by HTTP from client.
 
     $ curl http://127.0.0.1:9280/files/var/log/messages?tail
 
-You will get last 10 lines of /var/log/messages on a server.
+You will get last 10 lines of /var/log/messages on a server.  When open this
+URL using WEB browser, you will see same content, but refresh in each 5
+seconds.
 
+    http://127.0.0.1:9280/files/var/log/messages?tail&refresh=5
 
 ## Sever Usage
 
@@ -170,7 +173,8 @@ Add "Refresh" header with specified time (sec).
 * filter\_name: `refresh`
 * options: interval seconds to refresh.  0 for disable.
 
-Example: Open below URL using WEB browser, it refresh in each 5 seconds automatically.
+Example: Open below URL using WEB browser, it refresh in each 5 seconds
+automatically.
 
     http://127.0.0.1:9280/files/var/log/messages?tail&refresh=5
 
