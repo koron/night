@@ -119,15 +119,15 @@ Output selected fields of lines.
 
 ### Detect I/O error from /var/log/messages
 
-    $ curl http://127.0.0.1:9280/night/var/log/messages?grep=re:I%27O
+    $ curl http://127.0.0.1:9280/files/var/log/messages?grep=re:I%27O
 
 ### Check whether a program "WATCHDOG" was executed by cron or not.
 
-    $ curl http://127.0.0.1:9280/night/var/log/cron?grep=re:WATCHDOG
+    $ curl http://127.0.0.1:9280/files/var/log/cron?grep=re:WATCHDOG
 
 ### Found errors of HTTP access, limited recent 100 records.
 
-    $ curl http://127.0.0.1:9280/night/var/log/nginx/access.log?grep=re:200,match:false&tail=limit:100
+    $ curl http://127.0.0.1:9280/files/var/log/nginx/access.log?grep=re:200,match:false&tail=limit:100
 
 ## TODO
 
