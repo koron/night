@@ -44,6 +44,7 @@ Configuration file is JSON format.  All properties are optional.
 * `prefix` - String.  Prefix of URL to access resources.  (default: "files")
 * `locations` - String array.  List of path prefixes of accessible resource.
     Empty means no restriction.  (default: [] (empty))
+* `users` - String array.  List of "{USER}:{PASS}" which allowed to access.
 
 Example:
 
@@ -54,6 +55,10 @@ Example:
   "loactions": [
     "/var/log/",
     "/etc/"
+  ],
+  "users": [
+    "test:1234",
+    "root:9999"
   ]
 }
 ```
