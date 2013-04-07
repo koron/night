@@ -109,6 +109,8 @@ Example: get name and size entries in /var/log.
 
 `*.gz` files are decompressed automatically. 
 
+`*.bz2` files are decompressed automatically when available bzip2 command.
+
 ## Filter Spec
 
 Where `{filters}` is:
