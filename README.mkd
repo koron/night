@@ -40,14 +40,18 @@ Where OPTIONS are:
 
 Configuration file is JSON format.  All properties are optional.
 
-* `ssl` - Boolean.  Use HTTPS instead of HTTP.  (default: false; not tested)
-  * `ssl_key` - String.  Path of private key of the server in PEM format.
-  * `ssl_cert` - String.  Path of certificate key of the server in PEM format.
-* `port` - Number.  Listen port number.  (default: 9280)
-* `prefix` - String.  Prefix of URL to access resources.  (default: "files")
-* `locations` - String array.  List of path prefixes of accessible resource.
-    Empty means no restriction.  (default: [] (empty))
-* `users` - String array.  List of "{USER}:{PASS}" which allowed to access.
+*   `ssl` - Boolean.  Use HTTPS instead of HTTP.  (default: false; not tested)
+    *   `ssl_key` - String.  Path of private key of the server in PEM format.
+    *   `ssl_cert` - String.  Path of certificate key of the server in PEM
+        format.
+*   `port` - Number.  Listen port number.  (default: 9280)
+*   `prefix` - String.  Prefix of URL to access resources.  (default: "files")
+*   `locations` - String array.  List of path prefix of accessible resources.
+    Empty means no restriction (default: [] (empty)).
+*   `forbiddens` - String array.  List of path prefix of resources which
+    forbidden to be accessed.  Empty means no restriction (default: []
+    (empty)).  This override `locations` settings.
+*   `users` - String array.  List of "{USER}:{PASS}" which allowed to access.
 
 Example #1:
 
@@ -55,9 +59,13 @@ Example #1:
 {
   "port": 8000,
   "prefix": "night",
-  "loactions": [
+  "locations": [
     "/var/log/",
     "/etc/"
+  ],
+  "forbiddens": [
+    "/etc/ssh",
+    "/etc/passwd"
   ],
   "users": [
     "test:1234",
