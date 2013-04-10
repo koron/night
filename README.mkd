@@ -139,6 +139,7 @@ Currenly support these filters:
 * Head filter
 * Tail filter
 * Cut filter
+* Hash filter
 * Refresh (pseudo) filter
 
 #### Grep filter
@@ -187,6 +188,15 @@ Output selected fields of lines.
     * `N-M` - from N'th, to M'th field (included).
     * `N-` - from N'th field, to end of line.
     * `N-` - from first, to N'th field.
+
+#### Hash filter
+
+Output hash value.
+
+* filter\_name: `hash`
+* options:
+  * `algorithm` - one of `md5` (default), `sha1`, `sha256` or `sha512`
+  * `encoding` - one of `hex` (default), `base64` or `binary`
 
 #### Refresh (pseudo) filter
 
