@@ -31,9 +31,9 @@ seconds.
 
 Where OPTIONS are:
 
-* `-c {FILE}` or `--config=FILE` - server configuration file.
-* `-v` or `--verbose` - verbose message (not implemented yet).
-* `-h` or `--help` - show help message
+*   `-c {FILE}` or `--config=FILE` - server configuration file.
+*   `-v` or `--verbose` - verbose message (not implemented yet).
+*   `-h` or `--help` - show help message
 
 
 ## Server configuration file.
@@ -205,6 +205,13 @@ Output hash value.
 * options:
   * `algorithm` - one of `md5` (default), `sha1`, `sha256` or `sha512`
   * `encoding` - one of `hex` (default), `base64` or `binary`
+
+#### Count filter
+
+Count lines.
+
+*   filter\_name: `count`
+*   options: (none)
 
 #### Refresh (pseudo) filter
 
