@@ -127,12 +127,14 @@ Example: get name and size entries in /var/log.
 
 ### Command Source
 
-以下のURLにアクセスすると、予め指定したコマンドを実行しその標準出力を取得できま
-す。出力内容にはファイルなどと同じようにフィルタを適用できます。
+以下のURLにアクセスすると、予め Configuration file で指定したコマンドを実行しそ
+の標準出力を取得できます。出力内容にはファイルなどと同じようにフィルタを適用で
+きます。
 
     http://{host}:{port}/commands/{command_name}[?{filters}]
 
 TODO: translate to English.
+
 TODO: write description and examples.
 
 
