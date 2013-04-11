@@ -1,5 +1,8 @@
 # Night - file filter (grep, head & tail) - server.
 
+DevOps helper HTTP server.
+
+
 ## Install
 
     $ npm install koron/night
@@ -25,6 +28,7 @@ seconds.
 
     http://127.0.0.1:9280/files/var/log/messages?tail&refresh=5
 
+
 ## Sever Usage
 
     $ node [OPTIONS]
@@ -45,20 +49,20 @@ Configuration file is JSON format.  All properties are optional.
     *   `ssl_cert` - String.  Path of certificate key of the server in PEM
         format.
 *   `port` - Number.  Listen port number.  (default: 9280)
-*   `prefix` - String.  Prefix of URL to access resources.  (default: "files")
 *   `locations` - String array.  List of path prefix of accessible resources.
     Empty means no restriction (default: [] (empty)).
 *   `forbiddens` - String array.  List of path prefix of resources which
     forbidden to be accessed.  Empty means no restriction (default: []
     (empty)).  This override `locations` settings.
 *   `users` - String array.  List of "{USER}:{PASS}" which allowed to access.
+*   `commands` - Object.  Table of command consists name, command file and
+    arguments.
 
 Example #1:
 
 ```json
 {
   "port": 8000,
-  "prefix": "night",
   "locations": [
     "/var/log/",
     "/etc/"
@@ -71,6 +75,9 @@ Example #1:
     "test:1234",
     "root:9999"
   ]
+  "commands": {
+    "df": ["df", "-h"]
+  }
 }
 ```
 
@@ -88,11 +95,10 @@ Example #2: To enable SSL.
 
 Access URL is consisted from these rule.
 
-    http://{host}:{port}/{prefix}{/path/to/source}[?{filters}]
+    http://{host}:{port}/files{/path/to/source}[?{filters}]
 
 * `host` - host address, IP or host name.
 * `port` - port number, configurable see above.
-* `prefix` - prefix, configurable see above.
 * `/path/to/source` - path of the resource to read, file or directory.
 * `filters` - filters spec string, see below. (optional)
 
@@ -118,6 +124,17 @@ Example: get name and size entries in /var/log.
 `*.gz` files are decompressed automatically. 
 
 `*.bz2` files are decompressed automatically when available bzip2 command.
+
+### Command Source
+
+以下のURLにアクセスすると、予め指定したコマンドを実行しその標準出力を取得できま
+す。出力内容にはファイルなどと同じようにフィルタを適用できます。
+
+    http://{host}:{port}/commands/{command_name}[?{filters}]
+
+TODO: translate to English.
+TODO: write description and examples.
+
 
 ## Filter Spec
 
@@ -242,6 +259,7 @@ Example: Open below URL using WEB browser, it refresh in each 5 seconds
 automatically.
 
     http://127.0.0.1:9280/files/var/log/messages?tail&refresh=5
+
 
 ## Example
 
