@@ -148,6 +148,7 @@ Currenly support these filters:
 * Tail filter
 * Cut filter
 * Hash filter
+* LTSV filter
 * Refresh (pseudo) filter
 
 #### Grep filter
@@ -219,6 +220,16 @@ Count lines.
 
 *   filter\_name: `count`
 *   options: (none)
+
+#### LTSV filter
+
+Output, match to value of specified label, and output selected labels.
+
+*   filter\_name: `ltsv`
+*   options:
+    *   `grep` - match parameter: `{label},{pattern}`
+    *   `match` - output when match or not match.  default is true.
+    *   `cut` - selected labels, combinable by comma `,`.
 
 #### Refresh (pseudo) filter
 
