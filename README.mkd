@@ -148,6 +148,7 @@ Currenly support these filters:
 * Tail filter
 * Cut filter
 * Hash filter
+* LTSV Cut filter
 * Refresh (pseudo) filter
 
 #### Grep filter
@@ -219,6 +220,39 @@ Count lines.
 
 *   filter\_name: `count`
 *   options: (none)
+
+#### LTSV Cut filter
+
+Cut labeled values out of LTSV lines.
+
+*   filter\_name: `ltsv_cut`
+*   options:
+    *   `list` - selected label, combinable by comma `,`.
+
+Source:
+```
+foo:11	bar:12	baz:13
+foo:21	bar:22	baz:23
+foo:31	bar:32	baz:33
+```
+
+Filter #1: `ltsv_cut=list:foo`
+
+Result #1:
+```
+foo:11
+foo:21
+foo:31
+```
+
+Filter #2: `ltsv_cut=list:baz,foo`
+
+Result #2:
+```
+baz:13	foo:11
+baz:23	foo:21
+baz:33	foo:31
+```
 
 #### Refresh (pseudo) filter
 
