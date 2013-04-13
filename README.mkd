@@ -76,7 +76,8 @@ Example #1:
     "root:9999"
   ]
   "commands": {
-    "df": ["df", "-h"]
+    "df": ["df", "-h"],
+    "lstmp": ["ls", "-l", "/tmp"]
   }
 }
 ```
