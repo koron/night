@@ -1,10 +1,11 @@
 {
   "name": "night",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "File server with filters.",
   "main": "./lib/night_server.js",
   "dependencies": {
-    "node-getopt": "~0.2.3"
+    "node-getopt": "~0.2.3",
+    "glob": "~3.1.21"
   },
   "devDependencies": {},
   "scripts": {

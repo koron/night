@@ -126,6 +126,12 @@ Example: get name and size entries in /var/log.
 
 `*.bz2` files are decompressed automatically when available bzip2 command.
 
+### Glob Files Source
+
+Allowed file globs (wildcards) in `/path/to/source` like this:
+
+*   `/var/log/httpd/access*.gz?grep=...`
+
 ### Command Source
 
 以下のURLにアクセスすると、予め Configuration file で指定したコマンドを実行しそ
