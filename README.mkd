@@ -148,6 +148,20 @@ TODO: translate to English.
 
 TODO: write description and examples.
 
+### Config Source
+
+This feature is enabled when `config_visible` is `true`.
+
+When access below URL, you'll get config in JSON format.
+
+    http://{host}:{port}/config[?{filters}]
+
+### Help Source
+
+When access below URL, you'll get help (this file).
+
+    http://{host}:{port}/help[?{filters}]
+
 
 ## Filter Spec
 
