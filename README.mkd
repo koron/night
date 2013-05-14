@@ -57,6 +57,8 @@ Configuration file is JSON format.  All properties are optional.
 *   `users` - String array.  List of "{USER}:{PASS}" which allowed to access.
 *   `commands` - Object.  Table of command consists name, command file and
     arguments.
+*   `config_visible` - Booelan.  Accessible config under `/config/` path.
+    (default: false, security reason)
 
 Example #1:
 
