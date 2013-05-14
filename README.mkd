@@ -59,6 +59,8 @@ Configuration file is JSON format.  All properties are optional.
     arguments.
 *   `config_visible` - Booelan.  Accessible config under `/config/` path.
     (default: false, security reason)
+*   `refresh_always` - Number.  When larger than zero, "Refresh" header is
+    added for all requests with tha value.  0 for disable.  default is 0.
 
 Example #1:
 
