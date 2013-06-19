@@ -162,6 +162,11 @@ When access below URL, you'll get help (this file).
 
     http://{host}:{port}/help[?{filters}]
 
+### Version Source
+
+When access below URL, you'll get version info like `night/0.2.1`.
+
+    http://{host}:{port}/version[?{filters}]
 
 ## Filter Spec
 
