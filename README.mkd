@@ -126,9 +126,11 @@ Example: get name and size entries in /var/log.
 
 ### File Source
 
-`*.gz` files are decompressed automatically. 
+`*.gz` files are decompressed automatically.
 
 `*.bz2` files are decompressed automatically when available bzip2 command.
+
+`*.lz4` files are decompressed automatically when available lz4 command.
 
 ### Glob Files Source
 
