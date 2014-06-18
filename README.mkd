@@ -61,6 +61,8 @@ Configuration file is JSON format.  All properties are optional.
     (default: false, security reason)
 *   `refresh_always` - Number.  When larger than zero, "Refresh" header is
     added for all requests with tha value.  0 for disable.  default is 0.
+*   `default_filter` - String.  You can specify only `"tail"` for now.
+    Please refer below section for details.
 
 Example #1:
 
@@ -201,6 +203,7 @@ Currenly support these filters:
 * Hash filter
 * LTSV filter
 * Refresh (pseudo) filter
+* All (dummy) filter
 
 #### Grep filter
 
@@ -293,6 +296,25 @@ Example: Open below URL using WEB browser, it refresh in each 5 seconds
 automatically.
 
     http://127.0.0.1:9280/files/var/log/messages?tail&refresh=5
+
+#### All (dummy) filter
+
+Through all lines as is.  This would be used for `default_filter` enabled
+environment only.
+
+*   filter\_name: `all`
+*   options: (none)
+
+
+## Default Filter
+
+When you specify `default_filter` in config JSON, night apply that filter as
+default (when not specified any filters).  To just disable this
+`default_filter` temporary, you can use `all` special filter.
+
+### Avaialbe filters as default filter
+
+*   `tail`
 
 
 ## Example
