@@ -61,8 +61,9 @@ Configuration file is JSON format.  All properties are optional.
     (default: false, security reason)
 *   `refresh_always` - Number.  When larger than zero, "Refresh" header is
     added for all requests with tha value.  0 for disable.  default is 0.
-*   `default_filter` - String.  You can specify only `"tail"` for now.
-    Please refer below section for details.
+*   `default_filters` - String.  Applied if any filters are not specified by
+    query string.  Please refer below section for details. (default: empty, no
+    default filters)
 
 Example #1:
 
@@ -299,22 +300,21 @@ automatically.
 
 #### All (dummy) filter
 
-Through all lines as is.  This would be used for `default_filter` enabled
+Through all lines as is.  This would be used for `default_filters` enabled
 environment only.
 
 *   filter\_name: `all`
 *   options: (none)
 
 
-## Default Filter
+## Default Filters
 
-When you specify `default_filter` in config JSON, night apply that filter as
-default (when not specified any filters).  To just disable this
-`default_filter` temporary, you can use `all` special filter.
+When you specify `default_filters` in config JSON, night apply that filters as
+default, when not specified any filters by query string.  For its format,
+please refer **Filter Spec** section.
 
-### Avaialbe filters as default filter
-
-*   `tail`
+To just disable this `default_filters` temporary, you can use `all` special
+filter in query string.
 
 
 ## Example
