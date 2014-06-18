@@ -203,6 +203,7 @@ Currenly support these filters:
 * Hash filter
 * LTSV filter
 * Refresh (pseudo) filter
+* All (dummy) filter
 
 #### Grep filter
 
@@ -295,6 +296,14 @@ Example: Open below URL using WEB browser, it refresh in each 5 seconds
 automatically.
 
     http://127.0.0.1:9280/files/var/log/messages?tail&refresh=5
+
+#### All (dummy) filter
+
+Through all lines as is.  This would be used for `default_filter` enabled
+environment only.
+
+*   filter\_name: `all`
+*   options: (none)
 
 
 ## Default Filter
