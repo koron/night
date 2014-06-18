@@ -316,8 +316,27 @@ please refer **Filter Spec** section.
 To just disable this `default_filters` temporary, you can use `all` special
 filter in query string.
 
+### Configuration Example
 
-## Example
+This configuration will apply "tail" filter (default: last 10 lines) as
+`default_filters`.
+
+```
+{
+  "default_filters": "tail"
+}
+```
+
+If you changed like below, it show last 20 lines as `default_filters`.
+
+```
+{
+  "default_filters": "tail=limit:20"
+}
+```
+
+
+## Examples
 
 ### Detect I/O error from /var/log/messages
 
