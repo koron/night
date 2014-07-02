@@ -307,7 +307,7 @@ environment only.
 *   options: (none)
 
 
-## Default Filters
+## Default filters
 
 When you specify `default_filters` in config JSON, night apply that filters as
 default, when not specified any filters by query string.  For its format,
@@ -334,6 +334,24 @@ If you changed like below, it show last 20 lines as `default_filters`.
   "default_filters": "tail=limit:20"
 }
 ```
+
+### Complex default filters
+
+If giving a string for `default_filters`, night apply it to resources under
+`/files/` only.  But if you give an object, you can specify path which be
+applied to.  Let's see configuration sample:
+
+```
+{
+  "default_filters": {
+    "/files/var/": "tail",
+    "/files/tmp/": "head"
+  }
+}
+```
+
+This apply `tail` filter to resources under `/files/var/`, and `head` filter to
+under `/files/tmp/`.
 
 
 ## Examples
